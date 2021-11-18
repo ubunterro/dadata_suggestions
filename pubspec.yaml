@@ -1,7 +1,8 @@
+
 name: dadata_suggestions
 description: Dadata address suggestions (including forward and reverse geocoding) for Flutter.
-version: 0.1.2
-repository: https://github.com/illabo/dadata_suggestions
+version: 0.1.3
+repository: https://github.com/yavanya/dadata_suggestions
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -55,3 +56,4 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+
