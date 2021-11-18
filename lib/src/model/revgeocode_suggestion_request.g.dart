@@ -8,10 +8,13 @@ part of 'revgeocode_suggestion_request.dart';
 
 RevgeocodeSuggestionRequest _$RevgeocodeSuggestionRequestFromJson(
     Map<String, dynamic> json) {
-  $checkKeys(json, requiredKeys: const ['lat', 'lon']);
+  $checkKeys(
+    json,
+    requiredKeys: const ['lat', 'lon'],
+  );
   return RevgeocodeSuggestionRequest(
-    latitude: (json['lat'] as num)?.toDouble(),
-    longitude: (json['lon'] as num)?.toDouble(),
+    latitude: (json['lat'] as num).toDouble(),
+    longitude: (json['lon'] as num).toDouble(),
     count: json['count'] as int,
     language: json['language'] as String,
     radiusMeters: json['radius_meters'],

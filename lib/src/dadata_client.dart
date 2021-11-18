@@ -3,7 +3,7 @@ part of dadata_suggestions;
 /// Provides actual API calling.
 class DadataClient {
   final _client = Client();
-  String _token;
+  String? _token;
   Map<String, String> get _headers {
     return {
       "Authorization": "Token $_token",
@@ -43,14 +43,14 @@ class DadataClient {
   ) async {
     try {
       final resp = await _client.post(
-        endpoint,
+        Uri.parse(endpoint),
         headers: _headers,
         body: jsonEncode(query),
       );
-      if (resp?.body?.isNotEmpty ?? false) {
+      if (resp.body.isNotEmpty) {
         return AddressResponse.fromJson(jsonDecode(resp.body));
       }
-      return null;
+      return AddressResponse.fromJson(jsonDecode(resp.body));
     } catch (e) {
       throw e;
     }

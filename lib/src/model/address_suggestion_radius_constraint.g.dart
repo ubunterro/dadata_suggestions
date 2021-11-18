@@ -8,10 +8,13 @@ part of 'address_suggestion_radius_constraint.dart';
 
 AddressSuggestionRadiusConstraint _$AddressSuggestionRadiusConstraintFromJson(
     Map<String, dynamic> json) {
-  $checkKeys(json, requiredKeys: const ['lat', 'lon']);
+  $checkKeys(
+    json,
+    requiredKeys: const ['lat', 'lon'],
+  );
   return AddressSuggestionRadiusConstraint(
-    latitude: (json['lat'] as num)?.toDouble(),
-    longitude: (json['lon'] as num)?.toDouble(),
+    latitude: (json['lat'] as num).toDouble(),
+    longitude: (json['lon'] as num).toDouble(),
     radiusMeters: json['radius_meters'] as int,
   );
 }

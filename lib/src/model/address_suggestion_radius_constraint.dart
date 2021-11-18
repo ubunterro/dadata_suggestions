@@ -3,20 +3,21 @@ part 'address_suggestion_radius_constraint.g.dart';
 
 /// Used to limit the search for suggested addresses with the radius around
 /// a coordinate point.
-@JsonSerializable(explicitToJson: true, nullable: true)
+@JsonSerializable(
+  explicitToJson: true,
+)
 class AddressSuggestionRadiusConstraint {
   @JsonKey(name: "lat", required: true)
-  double latitude;
+  double? latitude;
 
   @JsonKey(name: "lon", required: true)
-  double longitude;
+  double? longitude;
 
   int _radiusMeters = 100;
 
   @JsonKey(name: "radius_meters")
   int get radiusMeters => _radiusMeters;
 
-  @JsonKey(name: "radius_meters")
   set radiusMeters(int value) {
     if (value < 0) {
       _radiusMeters = 0;
@@ -37,8 +38,8 @@ class AddressSuggestionRadiusConstraint {
   AddressSuggestionRadiusConstraint({
     this.latitude,
     this.longitude,
-    int radiusMeters,
-  }) : this._radiusMeters = radiusMeters;
+    int? radiusMeters,
+  }) : this._radiusMeters = radiusMeters!;
 
   AddressSuggestionRadiusConstraint.fromString(String latLon,
       {String delimiter = ','}) {

@@ -38,19 +38,16 @@ class DadataSuggestions {
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
   Future<AddressResponse> suggest(
     AddressSuggestionRequest request, {
-    void Function(AddressResponse resp, dynamic e) completion,
+    required void Function(AddressResponse resp, dynamic e) completion,
   }) async {
     try {
       final resp = await _client.suggest(request);
-      if (completion != null) {
-        completion(resp, null);
-      }
+
+      completion(resp, null);
+
       return resp;
     } catch (e) {
-      if (completion != null) {
-        completion(null, e);
-      }
-      return null;
+      throw e;
     }
   }
 
@@ -60,7 +57,7 @@ class DadataSuggestions {
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
   Future<AddressResponse> revGeocode(
     RevgeocodeSuggestionRequest request, {
-    void Function(AddressResponse resp, dynamic e) completion,
+    void Function(AddressResponse resp, dynamic e)? completion,
   }) async {
     try {
       final resp = await _client.revGeocode(request);
@@ -69,10 +66,7 @@ class DadataSuggestions {
       }
       return resp;
     } catch (e) {
-      if (completion != null) {
-        completion(null, e);
-      }
-      return null;
+      throw e;
     }
   }
 }
