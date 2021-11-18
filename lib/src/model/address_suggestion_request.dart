@@ -7,35 +7,36 @@ import 'level_boundry.dart';
 part 'address_suggestion_request.g.dart';
 
 ///Used to call address sugestions API.
-@JsonSerializable(explicitToJson: true, nullable: true)
+@JsonSerializable(
+  explicitToJson: true,
+)
 class AddressSuggestionRequest {
   @JsonKey(name: 'query', required: true)
   String query;
 
   @JsonKey(name: 'count')
-  int count = 10;
+  int? count = 10;
 
   @JsonKey(name: 'language')
-  String language = 'ru';
+  String? language = 'ru';
 
   @JsonKey(name: 'locations')
-  List<AddressSuggestionConstraint> constraints;
+  List<AddressSuggestionConstraint>? constraints;
 
   @JsonKey(name: 'locations_geo')
-  List<AddressSuggestionRadiusConstraint> radiusConstraints;
+  List<AddressSuggestionRadiusConstraint>? radiusConstraints;
 
   @JsonKey(name: 'locations_boost')
-  List<AddressSuggestionPriority> locationsPriority;
+  List<AddressSuggestionPriority>? locationsPriority;
 
-  LevelBoundry _upperBoundary;
-  LevelBoundry _lowerBoundary;
+  LevelBoundry? _upperBoundary;
+  LevelBoundry? _lowerBoundary;
 
   @JsonKey(name: 'from_bound')
   String get upperBoundary {
-    return _upperBoundary.value;
+    return _upperBoundary!.value;
   }
 
-  @JsonKey(name: 'from_bound')
   set upperBoundary(dynamic value) {
     if (value is String) {
       _upperBoundary = LevelBoundryValue.forValue(value);
@@ -45,15 +46,14 @@ class AddressSuggestionRequest {
       _upperBoundary = value;
       return;
     }
-    _upperBoundary = null;
+    _upperBoundary = LevelBoundry.undefined;
   }
 
   @JsonKey(name: 'to_bound')
   String get lowerBoundary {
-    return _lowerBoundary.value;
+    return _lowerBoundary!.value;
   }
 
-  @JsonKey(name: 'to_bound')
   set lowerBoundary(dynamic value) {
     if (value is String) {
       _lowerBoundary = LevelBoundryValue.forValue(value);
@@ -62,7 +62,7 @@ class AddressSuggestionRequest {
     if (value is LevelBoundry) {
       _lowerBoundary = value;
     }
-    _lowerBoundary = null;
+    _lowerBoundary = LevelBoundry.undefined;
   }
 
   ///AddressSuggestionRequest represents an serializable object
@@ -76,8 +76,8 @@ class AddressSuggestionRequest {
     this.constraints,
     this.radiusConstraints,
     this.locationsPriority,
-    LevelBoundry upperBoundary,
-    LevelBoundry lowerBoundary,
+    LevelBoundry? upperBoundary,
+    LevelBoundry? lowerBoundary,
   })  : this._upperBoundary = upperBoundary,
         this._lowerBoundary = lowerBoundary;
 
