@@ -39,7 +39,7 @@ class AddressSuggestionRadiusConstraint {
     this.latitude,
     this.longitude,
     int? radiusMeters,
-  }) : this._radiusMeters = radiusMeters!;
+  }) : this._radiusMeters = radiusMeters ?? 100;
 
   AddressSuggestionRadiusConstraint.fromString(String latLon,
       {String delimiter = ','}) {

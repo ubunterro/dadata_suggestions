@@ -38,12 +38,14 @@ class DadataSuggestions {
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
   Future<AddressResponse> suggest(
     AddressSuggestionRequest request, {
-    required void Function(AddressResponse resp, dynamic e) completion,
+    required void Function(AddressResponse resp, dynamic e)? completion,
   }) async {
     try {
       final resp = await _client.suggest(request);
 
-      completion(resp, null);
+      if (completion != null){
+        completion(resp, null);
+      }
 
       return resp;
     } catch (e) {
