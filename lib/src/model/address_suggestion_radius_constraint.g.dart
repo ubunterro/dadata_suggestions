@@ -13,9 +13,9 @@ AddressSuggestionRadiusConstraint _$AddressSuggestionRadiusConstraintFromJson(
     requiredKeys: const ['lat', 'lon'],
   );
   return AddressSuggestionRadiusConstraint(
-    latitude: (json['lat'] as num).toDouble(),
-    longitude: (json['lon'] as num).toDouble(),
-    radiusMeters: json['radius_meters'] as int,
+    latitude: (json['lat'] as num?)?.toDouble(),
+    longitude: (json['lon'] as num?)?.toDouble(),
+    radiusMeters: json['radius_meters'] as int?,
   );
 }
 
