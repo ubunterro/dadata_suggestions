@@ -3,4 +3,6 @@ class Constants {
       "https://suggestions.dadata.ru/suggestions/api/4_1/rs/";
   static const addressEndpoint = "${_suggestionsAPIURL}suggest/address";
   static const revGeocodeEndpoint = "${_suggestionsAPIURL}geolocate/address";
+
+  static const  fmsUnitEndpoint = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fms_unit';
 }

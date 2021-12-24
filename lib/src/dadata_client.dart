@@ -18,7 +18,7 @@ class DadataClient {
   }
 
   /// Calls suggestions API with [AddressSuggestionRequest] provided.
-  Future<AddressResponse> suggest(AddressSuggestionRequest query) async {
+  Future<AddressResponse?> suggest(AddressSuggestionRequest query) async {
     try {
       final q = query.toJson();
       return _performRequest(q, Constants.addressEndpoint);
@@ -28,7 +28,7 @@ class DadataClient {
   }
 
   /// Calls reverse geocoding API with [RevgeocodeSuggestionRequest] provided.
-  Future<AddressResponse> revGeocode(RevgeocodeSuggestionRequest query) async {
+  Future<AddressResponse?> revGeocode(RevgeocodeSuggestionRequest query) async {
     try {
       final q = query.toJson();
       return _performRequest(q, Constants.revGeocodeEndpoint);
@@ -37,7 +37,16 @@ class DadataClient {
     }
   }
 
-  Future<AddressResponse> _performRequest(
+  Future<FmsUnitSuggestions?> getFmsUnitSuggestion(FmsUnitRequest query) async {
+    try {
+      final q = query.toJson();
+      return _performFmsRequest(q);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<AddressResponse?> _performRequest(
     dynamic query,
     String endpoint,
   ) async {
@@ -50,7 +59,23 @@ class DadataClient {
       if (resp.body.isNotEmpty) {
         return AddressResponse.fromJson(jsonDecode(resp.body));
       }
-      return AddressResponse.fromJson(jsonDecode(resp.body));
+      return null;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<FmsUnitSuggestions?> _performFmsRequest(dynamic query) async {
+    try {
+      final resp = await _client.post(
+        Uri.parse(Constants.fmsUnitEndpoint),
+        headers: _headers,
+        body: jsonEncode(query),
+      );
+      if (resp.body.isNotEmpty) {
+        return FmsUnitSuggestions.fromJson(jsonDecode(resp.body));
+      }
+      return null;
     } catch (e) {
       throw e;
     }

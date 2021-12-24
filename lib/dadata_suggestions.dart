@@ -12,6 +12,9 @@ export 'src/model/suggestion_data.dart';
 
 import 'dart:convert';
 
+import 'package:dadata_suggestions/src/fms_unit/model/fms_unit_request.dart';
+import 'package:dadata_suggestions/src/fms_unit/model/fms_unit_suggestions.dart';
+
 import 'src/constants.dart';
 import 'src/model/address_suggestion_request.dart';
 import 'src/model/revgeocode_suggestion_request.dart';
@@ -36,9 +39,9 @@ class DadataSuggestions {
   /// an optional [completion] handler.
   /// Suggestions would be returned as [Future<AddressResponse>]
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
-  Future<AddressResponse> suggest(
+  Future<AddressResponse?> suggest(
     AddressSuggestionRequest request, {
-    void Function(AddressResponse resp, dynamic e)? completion,
+    void Function(AddressResponse? resp, dynamic e)? completion,
   }) async {
     try {
       final resp = await _client.suggest(request);
@@ -49,7 +52,10 @@ class DadataSuggestions {
 
       return resp;
     } catch (e) {
-      throw e;
+      if (completion != null){
+        completion(null, e);
+      }
+      return null;
     }
   }
 
@@ -57,9 +63,9 @@ class DadataSuggestions {
   /// an optional [completion] handler.
   /// Suggestions would be returned as [Future<AddressResponse>]
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
-  Future<AddressResponse> revGeocode(
+  Future<AddressResponse?> revGeocode(
     RevgeocodeSuggestionRequest request, {
-    void Function(AddressResponse resp, dynamic e)? completion,
+    void Function(AddressResponse? resp, dynamic e)? completion,
   }) async {
     try {
       final resp = await _client.revGeocode(request);
@@ -68,7 +74,30 @@ class DadataSuggestions {
       }
       return resp;
     } catch (e) {
-      throw e;
+      if (completion != null) {
+        completion(null, e);
+      }
+      return null;
+    }
+  }
+
+  Future<FmsUnitSuggestions?> getFmsUnit(
+      FmsUnitRequest request, {
+        void Function(FmsUnitSuggestions? resp, dynamic e)? completion,
+      }) async {
+    try {
+      final resp = await _client.getFmsUnitSuggestion(request);
+
+      if (completion != null){
+        completion(resp, null);
+      }
+
+      return resp;
+    } catch (e) {
+      if (completion != null){
+        completion(null, e);
+      }
+      return null;
     }
   }
 }
