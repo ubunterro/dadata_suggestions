@@ -33,8 +33,12 @@ class AddressSuggestionRequest {
   LevelBoundry? _lowerBoundary;
 
   @JsonKey(name: 'from_bound')
-  String? get upperBoundary {
-    return _upperBoundary?.value;
+  Map<String, String>? get upperBoundary {
+    if (_upperBoundary?.value != null){
+      return {'value' : _upperBoundary!.value};
+    } else {
+      return null;
+    }
   }
 
   set upperBoundary(dynamic value) {
@@ -50,8 +54,12 @@ class AddressSuggestionRequest {
   }
 
   @JsonKey(name: 'to_bound')
-  String? get lowerBoundary {
-    return _lowerBoundary?.value;
+  Map<String, String>? get lowerBoundary {
+    if (_lowerBoundary?.value != null){
+      return {'value' : _lowerBoundary!.value};
+    } else {
+      return null;
+    }
   }
 
   set lowerBoundary(dynamic value) {
