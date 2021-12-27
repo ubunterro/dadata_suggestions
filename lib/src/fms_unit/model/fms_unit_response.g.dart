@@ -18,5 +18,5 @@ Map<String, dynamic> _$FmsUnitResponseToJson(FmsUnitResponse instance) =>
     <String, dynamic>{
       'value': instance.value,
       'unrestricted_value': instance.unrestrictedValue,
-      'data': instance.data?.toJson(),
+      'data': instance.data,
     };

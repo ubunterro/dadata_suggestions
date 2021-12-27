@@ -37,7 +37,7 @@ class DadataSuggestions {
 
   /// Please pass [request] and
   /// an optional [completion] handler.
-  /// Suggestions would be returned as [Future<AddressResponse>]
+  /// Suggestions would be returned as [Future<AddressResponse?>]
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
   Future<AddressResponse?> suggest(
     AddressSuggestionRequest request, {
@@ -61,7 +61,7 @@ class DadataSuggestions {
 
   /// Please pass [request] and
   /// an optional [completion] handler.
-  /// Suggestions would be returned as [Future<AddressResponse>]
+  /// Suggestions would be returned as [Future<AddressResponse?>]
   /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
   Future<AddressResponse?> revGeocode(
     RevgeocodeSuggestionRequest request, {
@@ -81,6 +81,14 @@ class DadataSuggestions {
     }
   }
 
+  /// Returns a list of FMS Units from given issuer code (xxx-xxx)
+  ///
+  /// Docs: [https://dadata.ru/api/suggest/fms_unit/]
+  ///
+  /// Please pass [request] and
+  /// an optional [completion] handler.
+  /// Suggestions would be returned as [Future<FmsUnitSuggestions?>]
+  /// or passed to completion block along with [Error] or [Exception] as [dynamic] if any.
   Future<FmsUnitSuggestions?> getFmsUnit(
       FmsUnitRequest request, {
         void Function(FmsUnitSuggestions? resp, dynamic e)? completion,

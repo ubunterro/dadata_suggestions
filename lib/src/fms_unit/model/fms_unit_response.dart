@@ -3,9 +3,7 @@ import 'package:dadata_suggestions/src/fms_unit/model/fms_unit_response_data.dar
 part 'fms_unit_response.g.dart';
 
 /// Represents an object used to hold API response.
-@JsonSerializable(
-  explicitToJson: true,
-)
+@JsonSerializable()
 class FmsUnitResponse {
   @JsonKey(name: 'value')
   String? value;

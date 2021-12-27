@@ -1,36 +1,28 @@
 import 'package:dadata_suggestions/key.dart';
 import 'package:dadata_suggestions/src/fms_unit/model/fms_unit_request.dart';
+import 'package:dadata_suggestions/src/fms_unit/model/fms_unit_types.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dadata_suggestions/dadata_suggestions.dart';
 
 void main() {
-  test('Nothing', () {
-    DadataSuggestions('');
-    final nothing = null;
-    expect(nothing, nothing);
-  });
-
-  test('granular geocode', () async {
+  /// Tests getting address suggestion with a given granular filter
+  test('Granular geocode', () async {
     var client = DadataSuggestions(token);
-    var request = AddressSuggestionRequest('железногорск',
+    var request = AddressSuggestionRequest('Железногорск',
         upperBoundary: LevelBoundry.city, lowerBoundary: LevelBoundry.city);
     var result = await client.suggest(request);
 
-    assert(result?.suggestions != null);
-
-    result?.suggestions?.forEach((element) {
-      print(element.value);
-    });
+    var cities = result?.suggestions?.map((e) => e.value).toList();
+    expect(cities?.contains('Иркутская обл, г Железногорск-Илимский'), isTrue);
+    expect(cities?.contains('Курская обл, г Железногорск'), isTrue);
   });
 
   test('fmsUnit', () async {
     var req = FmsUnitRequest(
-        '460-001' /*, regionCodeFilter: "46", fmsTypeFilter: FmsUnitType.regionGUVD_MVD*/);
+        '500-103', regionCodeFilter: "50", fmsTypeFilter: FmsUnitType.fmsSubdivision);
     var client = DadataSuggestions(token);
     var result = await client.getFmsUnit(req);
 
-    assert(result != null);
-
-    print(result);
+    expect(result?.suggestions?.first.value, equals('ГУ МВД РОССИИ ПО МОСКОВСКОЙ ОБЛ.', ));
   });
 }

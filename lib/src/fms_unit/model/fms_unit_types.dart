@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonEnum()
+part 'fms_unit_types.g.dart';
+
+/// Types of existing passport issuer kinds
+@JsonEnum(alwaysCreate: true)
 enum FmsUnitType {
   /// 0 — подразделение ФМС
   @JsonValue("0")
@@ -18,3 +21,11 @@ enum FmsUnitType {
   @JsonValue("3")
   policeDepartment,
 }
+
+extension FmsUnitTypeValue on FmsUnitType{
+  static String? enumToString(FmsUnitType fmsUnitType) => _$FmsUnitTypeEnumMap[fmsUnitType];
+}
+
+
+
+

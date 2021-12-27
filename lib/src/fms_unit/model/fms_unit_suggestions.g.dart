@@ -14,5 +14,5 @@ FmsUnitSuggestions _$FmsUnitSuggestionsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FmsUnitSuggestionsToJson(FmsUnitSuggestions instance) =>
     <String, dynamic>{
-      'suggestions': instance.suggestions?.map((e) => e.toJson()).toList(),
+      'suggestions': instance.suggestions,
     };

@@ -3,10 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'fms_unit_suggestions.g.dart';
 
-/// Represents an object used to hold API response.
-@JsonSerializable(
-  explicitToJson: true,
-)
+/// A container for passport issuer suggestions received from the api
+@JsonSerializable()
 class FmsUnitSuggestions {
   @JsonKey(name: 'suggestions')
   List<FmsUnitResponse>? suggestions;
